@@ -1,0 +1,24 @@
+.profile__title {
+  /* outline: 1px yellow solid; */
+  margin: 0;
+  /* не совсем поняла, как уместить весь контент в блок profile__info, не задавая точной высоты строк */
+  /* height: 39px; */
+  min-height: 39px;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
+  word-wrap: break-word;
+
+}
+
+
+@media screen and (min-width: 320px) and (max-width: 395px) {
+  .profile__title {
+    max-width: 100%;
+    text-align: end;
+    font-size: 27px;
+    line-height: 33px;
+  }
+}
