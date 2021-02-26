@@ -8,7 +8,7 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
-  height: 27px;
+  min-height: 27px;
   padding: 0;
   color: #000000;
 }
