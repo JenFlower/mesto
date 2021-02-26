@@ -8,28 +8,15 @@ let subtitlePopup = document.querySelector('.profile__subtitle');
 // Находим форму в DOM
 let formElement = document.querySelector('.popup__form');
 // Находим поля формы в DOM
-let nameInput = document.querySelector('.popup__name');
-let jobInput = document.querySelector('.popup__occupation');
-
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
-function formSubmitHandler (evt) {
-    evt.preventDefault();
-    titlePopup.textContent = nameInput.value;
-    subtitlePopup.textContent = jobInput.value;
-    closePopup();
-}
-
-formElement.addEventListener('submit', formSubmitHandler);
-
+let nameInput = document.querySelector('.popup__input_field_name');
+let jobInput = document.querySelector('.popup__input_field_job');
 
 // открытие попапа
 function openPopup() {
-  // добавление модификатора для открытия попапа
-
   nameInput.value = titlePopup.textContent;
   jobInput.value = subtitlePopup.textContent;
 
+  // добавление модификатора для открытия попапа
   popup.classList.add('popup_is-opened');
 }
 
@@ -38,6 +25,15 @@ function closePopup() {
   popup.classList.remove('popup_is-opened');
 }
 
+// Обработчик «отправки» формы, хотя пока
+// она никуда отправляться не будет
+function formSubmitHandler (evt) {
+  evt.preventDefault();
+  titlePopup.textContent = nameInput.value;
+  subtitlePopup.textContent = jobInput.value;
+  closePopup();
+}
 
 buttonEdit.addEventListener('click', openPopup);
 buttonClosePopup.addEventListener('click', closePopup);
+formElement.addEventListener('submit', formSubmitHandler);

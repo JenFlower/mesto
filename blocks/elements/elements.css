@@ -1,14 +1,12 @@
 .elements {
   max-width: 880px;
-  min-height: 120px;
   margin: 0 auto;
 }
+
 @media screen and (max-width: 890px) {
   .elements {
     padding-left: 27px;
     padding-right: 27px;
-    /* min-height: 56px; */
-    /* padding-top: 28px; */
   }
 }
 

@@ -1,8 +1,5 @@
-.elements__item {
+.card {
   background-color: #ffffff;
-  /* max-width: 282px; */
   max-width: 100%;
-
   border-radius: 10px;
-
 }

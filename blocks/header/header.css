@@ -2,14 +2,12 @@
   /* outline: 1px green solid; */
   padding-top: 45px;
   max-width: 880px;
-  min-height: 74px;
   margin: 0 auto;
-  border-bottom: 1px #545454 solid;
+  border-bottom: 1px rgba(84, 84, 84, .7) solid;
 }
 
 @media screen and (min-width: 320px) and (max-width: 890px) {
   .header {
-    min-height: 56px;
     padding-top: 28px;
   }
 }

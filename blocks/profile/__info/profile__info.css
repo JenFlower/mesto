@@ -1,14 +1,12 @@
 .profile__info {
-  /* outline: 1px yellow solid; */
+  /* outline: 1px green solid; */
   max-width: 336px;
-
-  min-height: 73px;
   color: white;
   display: grid;
   grid-template-columns: 294px 24px;
   gap: 16px 18px;
   padding-left: 30px;
-  align-items: flex-end;
+  align-items: baseline;
 }
 
 @media screen and (max-width: 690px) {

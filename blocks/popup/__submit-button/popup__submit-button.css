@@ -2,8 +2,6 @@
   background-color: black;
   height: 50px;
   border-radius: 2px;
-
-
   font-family: Inter, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -11,7 +9,6 @@
   line-height: 22px;
   text-align: center;
   color: #FFFFFF;
-
   cursor: pointer;
 }
 

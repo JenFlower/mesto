@@ -1,4 +1,4 @@
-.elements__title {
+.card__title {
   /* border: 1px black solid; */
   max-width: calc(100% - 50px);
   font-family: Inter, Arial, Helvetica, sans-serif;
@@ -7,7 +7,6 @@
   font-size: 24px;
   line-height: 29px;
   margin: 0;
-
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

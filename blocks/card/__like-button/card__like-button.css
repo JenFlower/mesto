@@ -1,22 +1,22 @@
-.elements__like-button {
+.card__like-button {
   width: 22px;
   height: 19px;
   border: none;
   outline: none;
   padding: 0;
-  background-image: url(../../../images/button-like.png);
+  background-image: url(../../../images/button-like.svg);
   background-position: center;
   background-color: transparent;
   background-repeat: no-repeat;
   cursor: pointer;
 }
 
-.elements__like-button:hover {
+.card__like-button:hover {
   opacity: 0.5;
 }
 
 
-.elements__like-button:focus{
-  background-image: url(../../../images/button-like-black.png);
+.card__like-button:focus{
+  background-image: url(../../../images/button-like-black.svg);
 }
 
