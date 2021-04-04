@@ -30,50 +30,7 @@
 
       <!-- elements -->
       <section class="elements">
-        <ul class="elements__list">
-          <li class="card">
-            <img class="card__image" src="images/karachaevsk.jpg" alt="Карачаевск">
-            <div class="card__content">
-              <h2 class="card__title">Карачаевск</h2>
-              <button class="card__like-button" type="button" aria-label="Like"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__image" src="images/elbrus.jpg" alt="Эльбрус">
-            <div class="card__content">
-              <h2 class="card__title">Гора Эльбрус</h2>
-              <button class="card__like-button" type="button" aria-label="Like"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__image" src="images/dombay.jpg" alt="Домбай">
-            <div class="card__content">
-              <h2 class="card__title">Домбай</h2>
-              <button class="card__like-button" type="button" aria-label="Like"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__image" src="images/elbrus.jpg" alt="Эльбрус">
-            <div class="card__content">
-              <h2 class="card__title">Гора Эльбрус</h2>
-              <button class="card__like-button" type="button" aria-label="Like"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__image" src="images/dombay.jpg" alt="Домбай">
-            <div class="card__content">
-              <h2 class="card__title">Домбай</h2>
-              <button class="card__like-button" type="button" aria-label="Like"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__image" src="images/karachaevsk.jpg" alt="Карачаево-Черкесия">
-            <div class="card__content">
-              <h2 class="card__title">Карачаево-Черкесия</h2>
-              <button class="card__like-button" type="button" aria-label="Like"></button>
-            </div>
-          </li>
-        </ul>
+        <ul class="elements__list"></ul>
       </section>
     </main>
 
@@ -82,17 +39,56 @@
       <span class="footer__content">&copy; 2021 Mesto Russia</span>
     </footer>
 
-    <!-- popup -->
-    <section class="popup">
-      <form class="popup__form" name="popupForm">
-        <button class="popup__close-button" type="button"></button>
+    <!-- popup profile-->
+    <section class="popup popup-profile">
+      <form class="popup__form popup__form-profile" name="popupForm">
+        <button class="popup__close-button popup__close-button-profile" type="button"></button>
         <h3 class="popup__title">Редактировать профиль</h3>
         <input class="popup__input popup__input_field_name" type="text" name="inputName">
         <input class="popup__input popup__input_field_job" type="text" name="inputJob">
         <button type="submit" class="popup__submit-button">Сохранить</button>
       </form>
     </section>
+
+
+    <section class="popup popup-card">
+      <form class="popup__form popup__form-card" name="popupForm">
+        <button class="popup__close-button popup__close-button-card" type="button"></button>
+        <h3 class="popup__title">Новое место</h3>
+        <input class="popup__input popup__input_field__card-name" type="text" name="inputCardName" placeholder="Название">
+        <input class="popup__input popup__input_field_card-link" type="text" name="inputCardLink" placeholder="Ссылка на картинку">
+        <button type="submit" class="popup__submit-button">Создать</button>
+      </form>
+    </section>
+
+    <!-- popup show card-->
+    <section class="popup popup-preview">
+        <div class="preview">
+          <img class="preview__image">
+          <button class="popup__close-button popup__close-button-preview popup__close-button_card" type="button"></button>
+          <p class="preview__text"></p>
+        </div>
+    </section>
+
   </div>
-  <script src="./scripts/script.js"></script>
+
+
+
+
+  <!-- шаблон для карточки -->
+  <template id="card-template">
+    <li class="card">
+      <button class="card__trush" type="submit" aria-label="Delete"></button>
+      <img class="card__image">
+      <div class="card__content">
+        <h2 class="card__title"></h2>
+        <button class="card__like-button" type="button" aria-label="Like"></button>
+      </div>
+    </li>
+  </template>
+
+  <!-- <script src="./scripts/card.js"></script> -->
+
+  <script src="./scripts/profile.js"></script>
 </body>
 </html>
