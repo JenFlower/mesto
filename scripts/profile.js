@@ -5,28 +5,32 @@ const buttonClosePopupPreview = document.querySelector('.popup__close-button-pre
 const buttonEdit = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.popup-profile');
 // данные, которые нужно взять из верстки
-let titlePopup = document.querySelector('.profile__title');
-let subtitlePopup = document.querySelector('.profile__subtitle');
+const titlePopup = document.querySelector('.profile__title');
+const subtitlePopup = document.querySelector('.profile__subtitle');
 
 // Находим форму в DOM
-let formElementProfile = document.querySelector('.popup__form-profile');
+const formElementProfile = document.querySelector('.popup__form-profile');
 // Находим поля формы в DOM
-let nameInput = document.querySelector('.popup__input_field_name');
-let jobInput = document.querySelector('.popup__input_field_job');
+const nameInput = document.querySelector('.popup__input_field_name');
+const jobInput = document.querySelector('.popup__input_field_job');
 
 
-let buttonPlus = document.querySelector('.profile__add-button');
-let popupAddCard = document.querySelector('.popup-card');
+const buttonPlus = document.querySelector('.profile__add-button');
+const popupAddCard = document.querySelector('.popup-card');
 // данные, которые нужно взять из верстки
-let cardName = document.querySelector('.card__title');
-let cardLink = document.querySelector('.card__image');
+const cardName = document.querySelector('.card__title');
+const cardLink = document.querySelector('.card__image');
 
 // Находим форму в DOM
-let formElementAddCard = document.querySelector('.popup__form-card');
+const formElementAddCard = document.querySelector('.popup__form-card');
 // Находим поля формы в DOM
-let inputCardName = document.querySelector('.popup__input_field__card-name');
-let inputCardLink = document.querySelector('.popup__input_field_card-link');
+const inputCardName = document.querySelector('.popup__input_field__card-name');
+const inputCardLink = document.querySelector('.popup__input_field_card-link');
 // const card = document.querySelector('.card');
+
+const previewPopup = document.querySelector('.popup-preview');
+const previewImage = document.querySelector('.preview__image');
+const previewFigcaption = document.querySelector('.preview__text');
 
 // ul, в который надо добавить карточки
 const elementsList = document.querySelector('.elements__list');
@@ -92,10 +96,6 @@ function addCard(link, name) {
    else elementsList.prepend(card);
 }
 
-const previewPopup = document.querySelector('.popup-preview');
-const previewImage = document.querySelector('.preview__image');
-const previewFigcaption = document.querySelector('.preview__text');
-
 function openPreview(link, name) {
   previewImage.setAttribute('src', link);
   previewFigcaption.textContent = name;
@@ -109,7 +109,6 @@ function closePopupPreview() {
 
 
 buttonClosePopupPreview.addEventListener('click', closePopupPreview);
-
 
 // открытие попапа
 function openPopupProfile() {
@@ -137,9 +136,6 @@ buttonEdit.addEventListener('click', openPopupProfile);
 buttonClosePopupProfile.addEventListener('click', closePopupProfile);
 formElementProfile.addEventListener('submit', formSubmitHandlerProfile);
 
-
-
-
 ///.................ПОПАП ДОБАВЛЕНИЕ КАРТОЧКИ .........
 // открытие попапа
 function openPopupAddCard() {
@@ -160,7 +156,3 @@ function formSubmitHandlerAddCard (evt) {
 buttonPlus.addEventListener('click', openPopupAddCard);
 buttonClosePopupAddCard.addEventListener('click', closePopupAddCard);
 formElementAddCard.addEventListener('submit', formSubmitHandlerAddCard);
-
-
-///////////////////////////////////////
-
