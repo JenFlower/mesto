@@ -24,7 +24,7 @@ const cardLink = document.querySelector('.card__image');
 // Находим форму в DOM
 const formElementAddCard = document.querySelector('.popup__form-card');
 // Находим поля формы в DOM
-const inputCardName = document.querySelector('.popup__input_field__card-name');
+const inputCardName = document.querySelector('.popup__input_field_card-name');
 const inputCardLink = document.querySelector('.popup__input_field_card-link');
 // const card = document.querySelector('.card');
 
