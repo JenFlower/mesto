@@ -1,3 +1,4 @@
+
 const buttonClosePopupProfile = document.querySelector('.popup__close-button-profile');
 const buttonClosePopupAddCard = document.querySelector('.popup__close-button-card');
 const buttonClosePopupPreview = document.querySelector('.popup__close-button-preview');
@@ -34,38 +35,19 @@ const previewFigcaption = document.querySelector('.preview__text');
 
 // ul, в который надо добавить карточки
 const elementsList = document.querySelector('.elements__list');
-// cards
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 // insert cards
 initialCards.forEach(item => {
   addCard(item.link,item.name);
 });
+
+function openPopup(popupName) {
+  popupName.classList.add('popup_is-opened');
+}
+
+function closePopup(popupName) {
+  popupName.classList.remove('popup_is-opened');
+}
 
 function addCard(link, name) {
   const cardTemplate = document.querySelector('#card-template').content.querySelector('.card');
@@ -76,6 +58,7 @@ function addCard(link, name) {
    cardImage.setAttribute('src', link);
    const cardTitle = card.querySelector('.card__title');
    cardTitle.textContent = name;
+
    const likeButton = card.querySelector('.card__like-button').addEventListener('click', function(evt) {
      evt.target.classList.toggle('card__like-button_active');
    });
@@ -91,24 +74,25 @@ function addCard(link, name) {
    imgPreview.addEventListener('click', () => {
     openPreview(link, name);
    });
-   // проверка на пустоту инпутов
-   if(link == '' || name == '') closePopupAddCard;
-   else elementsList.prepend(card);
+
+   createCard(card);
 }
+
+function createCard(item) {
+  return elementsList.prepend(item);
+}
+
 
 function openPreview(link, name) {
   previewImage.setAttribute('src', link);
+  previewImage.setAttribute('alt', `Фотография "${name}"`);
   previewFigcaption.textContent = name;
-  previewPopup.classList.add('popup_is-opened');
-}
-
-// закрытие попапа
-function closePopupPreview() {
-  previewPopup.classList.remove('popup_is-opened');
+  openPopup(previewPopup);
 }
 
 
-buttonClosePopupPreview.addEventListener('click', closePopupPreview);
+buttonClosePopupPreview.addEventListener('click', function(){closePopup(previewPopup)});
+
 
 // открытие попапа
 function openPopupProfile() {
@@ -116,12 +100,7 @@ function openPopupProfile() {
   jobInput.value = subtitlePopup.textContent;
 
   // добавление модификатора для открытия попапа
-  popupProfile.classList.add('popup_is-opened');
-}
-
-// закрытие попапа
-function closePopupProfile() {
-  popupProfile.classList.remove('popup_is-opened');
+  openPopup(popupProfile);;
 }
 
 // Обработчик «отправки» формы
@@ -129,11 +108,11 @@ function formSubmitHandlerProfile (evt) {
   evt.preventDefault();
   titlePopup.textContent = nameInput.value;
   subtitlePopup.textContent = jobInput.value;
-  closePopupProfile();
+  closePopup(popupProfile);
 }
 
 buttonEdit.addEventListener('click', openPopupProfile);
-buttonClosePopupProfile.addEventListener('click', closePopupProfile);
+buttonClosePopupProfile.addEventListener('click', function(){closePopup(popupProfile)});
 formElementProfile.addEventListener('submit', formSubmitHandlerProfile);
 
 ///.................ПОПАП ДОБАВЛЕНИЕ КАРТОЧКИ .........
@@ -144,7 +123,9 @@ function openPopupAddCard() {
 
 // закрытие попапа
 function closePopupAddCard() {
-  popupAddCard.classList.remove('popup_is-opened');
+  inputCardName.value = '';
+  inputCardLink.value = '';
+  closePopup(popupAddCard);
 }
 
 function formSubmitHandlerAddCard (evt) {
@@ -153,6 +134,6 @@ function formSubmitHandlerAddCard (evt) {
   closePopupAddCard();
 }
 
-buttonPlus.addEventListener('click', openPopupAddCard);
+buttonPlus.addEventListener('click', function(){openPopup(popupAddCard)});
 buttonClosePopupAddCard.addEventListener('click', closePopupAddCard);
 formElementAddCard.addEventListener('submit', formSubmitHandlerAddCard);
