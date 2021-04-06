@@ -38,7 +38,7 @@ const elementsList = document.querySelector('.elements__list');
 
 // insert cards
 initialCards.forEach(item => {
-  addCard(item.link,item.name);
+  addCard(createCard(item.link, item.name));
 });
 
 function openPopup(popupName) {
@@ -49,7 +49,8 @@ function closePopup(popupName) {
   popupName.classList.remove('popup_is-opened');
 }
 
-function addCard(link, name) {
+// создание карточки
+function createCard(link, name) {
   const cardTemplate = document.querySelector('#card-template').content.querySelector('.card');
    // клонирование
    // true так как нужно все содержимое
@@ -75,10 +76,10 @@ function addCard(link, name) {
     openPreview(link, name);
    });
 
-   createCard(card);
+   return card;
 }
-
-function createCard(item) {
+// добавление карточки в дом
+function addCard(item) {
   return elementsList.prepend(item);
 }
 
@@ -89,10 +90,7 @@ function openPreview(link, name) {
   previewFigcaption.textContent = name;
   openPopup(previewPopup);
 }
-
-
 buttonClosePopupPreview.addEventListener('click', function(){closePopup(previewPopup)});
-
 
 // открытие попапа
 function openPopupProfile() {
@@ -130,7 +128,7 @@ function closePopupAddCard() {
 
 function formSubmitHandlerAddCard (evt) {
   evt.preventDefault();
-  addCard(inputCardLink.value, inputCardName.value);
+  addCard(createCard(inputCardLink.value, inputCardName.value));
   closePopupAddCard();
 }
 
