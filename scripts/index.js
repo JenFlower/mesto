@@ -41,6 +41,7 @@ initialCards.forEach(item => {
   addCard(createCard(item.link, item.name));
 });
 
+
 function openPopup(popupName) {
   popupName.classList.add('popup_is-opened');
 }
@@ -113,12 +114,13 @@ buttonEdit.addEventListener('click', openPopupProfile);
 buttonClosePopupProfile.addEventListener('click', function(){closePopup(popupProfile)});
 formElementProfile.addEventListener('submit', formSubmitHandlerProfile);
 
-///.................ПОПАП ДОБАВЛЕНИЕ КАРТОЧКИ .........
+const popup = document.querySelector('.popup');
+
 // открытие попапа
 function openPopupAddCard() {
   popupAddCard.classList.add('popup_is-opened');
-}
 
+}
 // закрытие попапа
 function closePopupAddCard() {
   inputCardName.value = '';
@@ -135,3 +137,31 @@ function formSubmitHandlerAddCard (evt) {
 buttonPlus.addEventListener('click', function(){openPopup(popupAddCard)});
 buttonClosePopupAddCard.addEventListener('click', closePopupAddCard);
 formElementAddCard.addEventListener('submit', formSubmitHandlerAddCard);
+
+
+// закрытие на esc
+const escHandler = (evt) => {
+  if(evt.key === "Escape") {
+    // нашли открытый попап
+    const openedPopup = document.querySelector('.popup_is-opened')
+    closePopup(openedPopup)
+  }
+}
+
+// закрытие на клик
+const clickHandler = () => {
+  const popups = document.querySelectorAll('.popup_is-opened')
+  popups.forEach(popupElement => {
+    popupElement.addEventListener('click', (evt) => {
+      // проверка на нажатие на форму и изображение
+      if(!evt.target.closest('.popup__form') && !evt.target.closest('.preview')) {
+        closePopup(popupElement);
+      }
+    })
+  })
+}
+
+document.addEventListener('keydown', escHandler);
+document.addEventListener('click', clickHandler);
+
+

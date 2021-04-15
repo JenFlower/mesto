@@ -10,7 +10,18 @@
   text-align: center;
   color: #FFFFFF;
   cursor: pointer;
+  margin-top: 48px;
 }
+
+.popup__submit-button:disabled {
+  color: #000;
+  background: #fff;
+  opacity: 0.2;
+  user-select: none;
+  pointer-events: none;
+  border: 1px solid #000;
+}
+
 
 .popup__submit-button:hover {
   opacity: .8;
