@@ -186,6 +186,7 @@ const clickHandler = () => {
 
 
 // document.addEventListener('keydown', escHandler);
-document.addEventListener('click', clickHandler);
+// document.addEventListener('click', clickHandler);
+clickHandler();
 
 
