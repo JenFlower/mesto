@@ -7,27 +7,27 @@ export default class FormValidator {
   }
 
   // не совсем поняла, что делать с этим методом. вызываю в closePopupAddCard(), но зачем? кнопка и без этого была заблокирована при пустой форме
-  toggleBtnState(inputList, btnElem) {
+  toggleBtnState() {
     // если хотя бы 1 поле невалидное - добавить класс кнопке
     // метод some вернет true когда встретит невалидный элемент
-    const isInvalidInput = inputList.some(inputElement => !inputElement.validity.valid);
+    const isInvalidInput = this._inputList.some(inputElement => !inputElement.validity.valid);
 
     if(isInvalidInput) {
-      this._inactiveButtonSubmit(btnElem);
+      this._inactiveButtonSubmit();
     }
     else {
-      this._activateButtonSubmit(btnElem);
+      this._activateButtonSubmit();
     }
   }
 
-  _inactiveButtonSubmit(btnElem) {
-    btnElem.setAttribute('disabled', true);
-    btnElem.classList.add(this._settings.inactiveButtonClass);
+  _inactiveButtonSubmit() {
+    this._btnElem.setAttribute('disabled', true);
+    this._btnElem.classList.add(this._settings.inactiveButtonClass);
   }
 
-  _activateButtonSubmit(btnElem) {
-    btnElem.removeAttribute('disabled', true);
-    btnElem.classList.remove(this._settings.inactiveButtonClass);
+  _activateButtonSubmit() {
+    this._btnElem.removeAttribute('disabled', true);
+    this._btnElem.classList.remove(this._settings.inactiveButtonClass);
   }
 
   _showInputError(inputElement, errorMessage) {
@@ -58,9 +58,9 @@ export default class FormValidator {
   _setEventListeners() {
     this._form.addEventListener('submit', evt => {
       evt.preventDefault();
-      this._inactiveButtonSubmit(this._btnElem);
+      this._inactiveButtonSubmit();
     });
-    this._inactiveButtonSubmit(this._btnElem);
+    this._inactiveButtonSubmit();
 
 
     this._inputList.forEach((inputElement) => {
@@ -69,7 +69,7 @@ export default class FormValidator {
         // вызов функции для проверки валидности инпутов
         this._checkInputValidity(inputElement);
         // переключение кнопки
-        this.toggleBtnState(this._inputList, this._btnElem);
+        this.toggleBtnState();
       });
 
     });

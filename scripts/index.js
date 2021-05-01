@@ -1,4 +1,4 @@
-import * as initCards from './initial-cards.js'
+import initialCards from './initial-cards.js'
 import Card from './Card.js'
 import FormValidator from './FormValidator.js'
 import * as utils from './Utils.js'
@@ -51,7 +51,7 @@ const previewPopup = document.querySelector('.popup-preview');
 // ul, в который надо добавить карточки
 const elementsList = document.querySelector('.elements__list');
 
-initCards.initialCards.forEach(item => {
+initialCards.forEach(item => {
   addCard(item)
 });
 
@@ -91,11 +91,8 @@ formElementProfile.addEventListener('submit', formSubmitHandlerProfile);
 // закрытие попапа
 function closePopupAddCard() {
   formElementAddCard.reset();
-  const inputList = {
-    first: inputCardName,
-    second: inputCardLink
-  }
-  addCardFormValidator.toggleBtnState(inputList, settings.submitButtonSelector);
+
+  addCardFormValidator.toggleBtnState();
   utils.closePopup(popupAddCard);
 }
 

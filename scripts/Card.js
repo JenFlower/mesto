@@ -1,7 +1,3 @@
-import * as utils from './Utils.js'
-
-
-
 export default class Card {
   constructor(data, cardSelector, openPreview) {
     this._name = data.name;
