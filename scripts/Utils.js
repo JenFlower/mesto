@@ -3,7 +3,7 @@ export const openPopup = popupName => {
   document.addEventListener('keydown', escHandler);
 }
 
-const closePopup = popupName => {
+export const closePopup = popupName => {
   popupName.classList.remove('popup_is-opened');
   document.removeEventListener('keydown', escHandler);
 }
@@ -17,7 +17,7 @@ const escHandler = (evt) => {
   }
 }
 
-export const clickHandler = () => {
+export const setPopupsEventListeners = () => {
   const popups = document.querySelectorAll('.popup');
   popups.forEach(popup => {
     popup.addEventListener('click', (evt) => {

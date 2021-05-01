@@ -2,30 +2,32 @@ export default class FormValidator {
   constructor(settings, form) {
     this._settings = settings;
     this._form = form;
+    this._inputList = Array.from(this._form.querySelectorAll(this._settings.inputSelector));
+    this._btnElem = this._form.querySelector(this._settings.submitButtonSelector);
   }
 
-  _toggleBtnState(inputList, btnElem) {
+  // не совсем поняла, что делать с этим методом. вызываю в closePopupAddCard(), но зачем? кнопка и без этого была заблокирована при пустой форме
+  toggleBtnState(inputList, btnElem) {
     // если хотя бы 1 поле невалидное - добавить класс кнопке
     // метод some вернет true когда встретит невалидный элемент
     const isInvalidInput = inputList.some(inputElement => !inputElement.validity.valid);
-    const isInputEmpty = !inputList.some(inputElement => inputElement.value.length > 0);
 
-    if(isInvalidInput || isInputEmpty) {
-      this._inactiveButtonSubmit(btnElem, this._settings.inactiveButtonClass);
+    if(isInvalidInput) {
+      this._inactiveButtonSubmit(btnElem);
     }
     else {
-      this._activateButtonSubmit(btnElem, this._settings.inactiveButtonClass);
+      this._activateButtonSubmit(btnElem);
     }
   }
 
-  _inactiveButtonSubmit(btnElem, inactiveButtonClass) {
+  _inactiveButtonSubmit(btnElem) {
     btnElem.setAttribute('disabled', true);
-    btnElem.classList.add(inactiveButtonClass);
+    btnElem.classList.add(this._settings.inactiveButtonClass);
   }
 
-  _activateButtonSubmit(btnElem, inactiveButtonClass) {
+  _activateButtonSubmit(btnElem) {
     btnElem.removeAttribute('disabled', true);
-    btnElem.classList.remove(inactiveButtonClass);
+    btnElem.classList.remove(this._settings.inactiveButtonClass);
   }
 
   _showInputError(inputElement, errorMessage) {
@@ -54,27 +56,20 @@ export default class FormValidator {
   }
 
   _setEventListeners() {
-    // получаем список инпутов
-    const inputList = Array.from(this._form.querySelectorAll(this._settings.inputSelector));
-    // находим кнопку
-    const btnElem = this._form.querySelector(this._settings.submitButtonSelector);
-
-    const inButtonClass = this._form.querySelector(this._settings.inactiveButtonClass);
-
     this._form.addEventListener('submit', evt => {
       evt.preventDefault();
-      this._inactiveButtonSubmit(btnElem, inButtonClass);
+      this._inactiveButtonSubmit(this._btnElem);
     });
-    this._inactiveButtonSubmit(btnElem, inButtonClass);
+    this._inactiveButtonSubmit(this._btnElem);
 
 
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       // повесим событие ввода на инпут
       inputElement.addEventListener('input', () => {
         // вызов функции для проверки валидности инпутов
         this._checkInputValidity(inputElement);
         // переключение кнопки
-        this._toggleBtnState(inputList, btnElem);
+        this.toggleBtnState(this._inputList, this._btnElem);
       });
 
     });
@@ -96,19 +91,3 @@ export default class FormValidator {
   }
 
 }
-// const config = {
-//   formSelector: '.popup__form',
-//   inputSelector: '.popup__input',
-//   submitButtonSelector: '.popup__submit-button',
-//   inactiveButtonClass: 'popup__submit-button_disabled',
-//   inputErrorClass: 'popup__input_error',
-//   errorClass: 'popup__input-error_active'
-// }
-// const profileForm = document.querySelector('.popup__form-profile');
-// const addCardForm = document.querySelector('.popup__form-card');
-
-// const profileFormValidator = new FormValidator(config, profileForm)
-// const addCardFormValidator = new FormValidator(config, addCardForm)
-
-// profileFormValidator.enableValidation();
-// addCardFormValidator.enableValidation();
