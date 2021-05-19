@@ -1,7 +1,12 @@
-import initialCards from './initial-cards.js'
-import Card from './Card.js'
-import FormValidator from './FormValidator.js'
-import * as utils from './Utils.js'
+import './index.css'
+import initialCards from '../components/initial-cards.js'
+import Card from '../components/Card.js'
+import FormValidator from '../components/FormValidator.js'
+import Section from '../components/Section.js'
+// import * as utils from '../../scripts/Utils.js'
+import PopupWithImage from '../components/PopupWithImage.js'
+import PopupWithForm from '../components/PopupWithForm.js'
+import UserInfo from '../components/UserInfo.js'
 
 
 const config = {
@@ -51,69 +56,80 @@ const previewPopup = document.querySelector('.popup-preview');
 // ul, в который надо добавить карточки
 const elementsList = document.querySelector('.elements__list');
 
-initialCards.forEach(item => {
-  addCard(item)
-});
 
-function addCard(item) {
-  const card = new Card(item, '.card-template_type_default', openPreview);
-  // console.log('card created')
-  return elementsList.prepend(card.generateCard());
-}
+
+///////////////////////////////////////////////////////////////////
+
+
+const popupWithImage = new PopupWithImage(previewPopup);
+popupWithImage.setEventListeners();
 
 function openPreview(link, name) {
-  previewImage.setAttribute('src', link);
-  previewImage.setAttribute('alt', `Фотография "${name}"`);
-  previewText.textContent = name;
-  utils.openPopup(previewPopup);
+  popupWithImage.open(link, name);
 }
 
-// открытие попапа
-function openPopupProfile() {
-  nameInput.value = titlePopup.textContent;
-  jobInput.value = subtitlePopup.textContent;
+const section = new Section({items: initialCards, renderer: (item) => {
+  const card = new Card(item, '.card-template_type_default', openPreview);
+  section.addItem(card.generateCard())
+ }},
+ elementsList)
+ section.render();
 
-  // добавление модификатора для открытия попапа
-  utils.openPopup(popupProfile);
-}
-
-// Обработчик «отправки» формы
-function formSubmitHandlerProfile (evt) {
-  evt.preventDefault();
-  titlePopup.textContent = nameInput.value;
-  subtitlePopup.textContent = jobInput.value;
-  utils.closePopup(popupProfile);
-}
-
-buttonEdit.addEventListener('click', openPopupProfile);
-formElementProfile.addEventListener('submit', formSubmitHandlerProfile);
-
-// закрытие попапа
-function closePopupAddCard() {
-  formElementAddCard.reset();
-
-  addCardFormValidator.toggleBtnState();
-  utils.closePopup(popupAddCard);
-}
-
-function formSubmitHandlerAddCard (evt) {
-  evt.preventDefault();
-  const dataCard = {
+function dataCard() {
+  return{
     name: inputCardName.value,
     link: inputCardLink.value
   }
-  addCard(dataCard)
-  closePopupAddCard();
+}
+
+function dataProfile() {
+  return {
+    name: titlePopup.textContent,
+    job: subtitlePopup.textContent
+  }
+}
+
+function dataProfileValues() {
+  return {
+    name: nameInput.value,
+    job: jobInput.value
+  }
+}
+
+const popupWithFormProfile = new PopupWithForm(popupProfile, ()=>{formSubmitHandlerProfile(event, dataProfileValues())});
+popupWithFormProfile.setEventListeners();
+
+
+const popupWithFormAddCard = new PopupWithForm(popupAddCard, ()=>{formSubmitHandlerAddCard(event, dataCard())});
+popupWithFormAddCard.setEventListeners();
+
+
+const userInfo = new UserInfo(dataProfile())
+
+function openPopupProfile() {
+  nameInput.value = userInfo.getUserInfo().name;
+  jobInput.value = userInfo.getUserInfo().job;
+  popupWithFormProfile.open();
+}
+
+// Обработчик «отправки» формы
+function formSubmitHandlerProfile(evt, {name, job}) {
+  evt.preventDefault();
+  titlePopup.textContent = userInfo.setUserInfo(name, job).name;
+  subtitlePopup.textContent = userInfo.setUserInfo(name, job).job;
+}
+
+buttonEdit.addEventListener('click', openPopupProfile);
+
+function formSubmitHandlerAddCard(evt, {name, link}) {
+  evt.preventDefault();
+  const sectionCard = new Section({items: [{name, link}], renderer: (item) => {
+    const card = new Card(item, '.card-template_type_default', openPreview);
+    sectionCard.addItem(card.generateCard())
+  }}, elementsList);
+  sectionCard.render();
 }
 
 buttonPlus.addEventListener('click', function(){
-  utils.openPopup(popupAddCard);
-  formElementAddCard.reset();
+  popupWithFormAddCard.open();
 });
-formElementAddCard.addEventListener('submit', formSubmitHandlerAddCard);
-
-
-// вызов функции закрытия на клик
-utils.setPopupsEventListeners();
-
-

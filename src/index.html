@@ -5,20 +5,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <link rel="stylesheet" href="pages/index.css">
+  <!-- <link rel="stylesheet" href="./pages/index.css"> -->
 </head>
 <body>
   <div class="page">
     <!-- header -->
     <header class="header">
-      <img class="header__logo" src="./images/header-logo.svg" alt="Логотип">
+      <img class="header__logo" src="<%=require('./images/header-logo.svg')%>" alt="Логотип">
     </header>
 
     <main>
       <!-- profile -->
       <section class="profile">
         <div class="profile__content">
-          <img class="profile__logo" src="./images/avatar.png" alt="Аватар путешественника">
+          <img class="profile__logo" src="<%=require('./images/avatar.png')%>" alt="Аватар путешественника">
           <div class="profile__info">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
             <button class="profile__edit-button" type="button"></button>
@@ -38,6 +38,7 @@
     <footer class="footer">
       <span class="footer__content">&copy; 2021 Mesto Russia</span>
     </footer>
+
 
     <!-- popup profile-->
     <section class="popup popup-profile">
@@ -65,6 +66,7 @@
       </form>
     </section>
 
+
     <!-- popup show card-->
     <section class="popup popup-preview">
       <div class="preview">
@@ -88,7 +90,7 @@
     </li>
   </template>
 
-  <script type="module" src="./scripts/index.js"></script>
+  <script type="module" src="./pages/index.js"></script>
 
 </body>
 </html>
