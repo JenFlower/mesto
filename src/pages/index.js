@@ -31,14 +31,14 @@ const section = new Section({items: initialCards, renderer: (item) => {
  section.render();
 
 const popupWithFormProfile = new PopupWithForm('.popup-profile', (inputsData)=>{
-  formSubmitHandlerProfile(event, inputsData);
+  formSubmitHandlerProfile(inputsData);
   console.log("inputsData " + inputsData)
 });
 popupWithFormProfile.setEventListeners();
 
 
 const popupWithFormAddCard = new PopupWithForm('.popup-card', (inputsData)=>{
-  formSubmitHandlerAddCard(event, inputsData)
+  formSubmitHandlerAddCard(inputsData)
 
 });
 popupWithFormAddCard.setEventListeners();
@@ -53,18 +53,14 @@ function openPopupProfile() {
 }
 
 // Обработчик «отправки» формы
-function formSubmitHandlerProfile(evt, {inputName, inputJob}) {
-  evt.preventDefault();
+function formSubmitHandlerProfile({inputName, inputJob}) {
   userInfo.setUserInfo(inputName, inputJob)
   console.log(inputName, inputJob)
 }
 
 constants.buttonEdit.addEventListener('click', openPopupProfile);
 
-
-
-function formSubmitHandlerAddCard(evt, {inputCardName, inputCardLink}) {
-  evt.preventDefault();
+function formSubmitHandlerAddCard({inputCardName, inputCardLink}) {
   section.addItem(createCard({name: inputCardName, link: inputCardLink}))
   console.log("formSubmitHandlerAddCard: ", inputCardLink)
 }
