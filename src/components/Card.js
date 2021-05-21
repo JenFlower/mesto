@@ -51,13 +51,6 @@ export default class Card {
     // console.log('like!')
   }
 
-  // _openPreview() {
-  //   this._previewImage.setAttribute('src', this._link);
-  //   this._previewImage.setAttribute('alt', `Фотография "${this._name}"`);
-  //   this._previewText.textContent = this._name;
-  //   utils.openPopup(this._previewPopup)
-  // }
-
   _handleDelete() {
     this._element.remove();
     this._element = null;

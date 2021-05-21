@@ -2,7 +2,7 @@ export default class Section {
   constructor({items, renderer}, containerSelector) {
     this._items = items;
     this._renderer = renderer;
-    this._containerSelector = containerSelector;
+    this._container = document.querySelector(containerSelector);
   }
 
   // отвечает за отрисовку всех элементов
@@ -14,7 +14,7 @@ export default class Section {
 
   // принимает DOM-элемент и добавляет его в контейнер.
   addItem(generateCard) {
-    this._containerSelector.prepend(generateCard);
+    this._container.prepend(generateCard);
   }
 }
 
