@@ -7,6 +7,7 @@
   line-height: 15px;
   color: #FF0000;
   opacity: 0;
+  display: none;
   min-height: 12px;
   padding-top: 5px;
 }

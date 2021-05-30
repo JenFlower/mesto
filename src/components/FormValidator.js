@@ -1,12 +1,31 @@
+// import { NormalModule } from "webpack";
+
 export default class FormValidator {
   constructor(settings, form) {
     this._settings = settings;
     this._form = form;
     this._inputList = Array.from(this._form.querySelectorAll(this._settings.inputSelector));
     this._btnElem = this._form.querySelector(this._settings.submitButtonSelector);
+    this._errors = Array.from(this._form.querySelectorAll('.popup__input-error'))
   }
 
-  // не совсем поняла, что делать с этим методом. вызываю в closePopupAddCard(), но зачем? кнопка и без этого была заблокирована при пустой форме
+  clearError() {
+    // console.log("errors " + this._errors)
+    // const errorElement = this._form.querySelector(`#${inputElement.id}-error`)
+    this._errors.forEach(item => {
+      // console.log("item: " + item)
+      item.classList.remove(this._settings.errorClass)
+      // inputElement.classList.remove(this._settings.inputErrorClass)
+    })
+
+    this._inputList.forEach(inputElement => {
+      inputElement.classList.remove(this._settings.inputErrorClass)
+    })
+    // errorElement.textContent = "";
+    // errorElement.classList.remove(this._settings.errorClass);
+    // inputElement.classList.remove(this._settings.inputErrorClass)
+  }
+
   toggleBtnState() {
     // если хотя бы 1 поле невалидное - добавить класс кнопке
     // метод some вернет true когда встретит невалидный элемент
@@ -46,13 +65,16 @@ export default class FormValidator {
 
   _checkInputValidity(inputElement) {
     if(!inputElement.validity.valid) {
+
       // текст ошибки
       const errorMessage = inputElement.validationMessage;
       // если инпут невалидный - показать ошибку
       this._showInputError(inputElement, errorMessage);
     }
+    // else if(!inputElement.validity.valid && inputElement.value === '')
+    //   this._hideInputError(inputElement);
     else  // иначе убрать ошибку
-    this._hideInputError(inputElement);
+      this._hideInputError(inputElement);
   }
 
   _setEventListeners() {
@@ -65,7 +87,10 @@ export default class FormValidator {
 
     this._inputList.forEach((inputElement) => {
       // повесим событие ввода на инпут
+
       inputElement.addEventListener('input', () => {
+
+
         // вызов функции для проверки валидности инпутов
         this._checkInputValidity(inputElement);
         // переключение кнопки

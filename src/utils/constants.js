@@ -12,6 +12,8 @@ export const formElementProfile = document.querySelector('.popup__form-profile')
 // Находим форму в DOM
 export const formElementAddCard = document.querySelector('.popup__form-card');
 
+export const formElementEditLogo = document.querySelector('.popup__form-logo');
+
 export const buttonEdit = document.querySelector('.profile__edit-button');
 export const popupProfile = document.querySelector('.popup-profile');
 // данные, которые нужно взять из верстки
@@ -26,6 +28,9 @@ export const jobInput = document.querySelector('.popup__input_field_job');
 
 export const buttonPlus = document.querySelector('.profile__add-button');
 export const popupAddCard = document.querySelector('.popup-card');
+export const popupDelete = document.querySelector('.popup-delete');
+export const popupLogo = document.querySelector('.popup-logo');
+export const logoImage = document.querySelector('.profile__logo');
 
 // Находим поля формы в DOM
 export const inputCardName = document.querySelector('.popup__input_field_card-name');

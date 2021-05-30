@@ -18,7 +18,12 @@
       <!-- profile -->
       <section class="profile">
         <div class="profile__content">
-          <img class="profile__logo" src="<%=require('./images/avatar.png')%>" alt="Аватар путешественника">
+          <div class="profile__cover-logo">
+            <img class="profile__logo" src="<%=require('./images/avatar.png')%>" alt="Аватар путешественника">
+          </div>
+          <!-- <div class="profile__logo-pen"></div> -->
+
+          <!-- </div> -->
           <div class="profile__info">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
             <button class="profile__edit-button" type="button"></button>
@@ -44,25 +49,25 @@
     <section class="popup popup-profile">
       <form class="popup__form popup__form-profile" name="popupForm" novalidate>
         <button class="popup__close-button popup__close-button-profile" type="button"></button>
-        <h3 class="popup__title">Редактировать профиль</h3>
+        <h3 class="popup__title popup__title_form">Редактировать профиль</h3>
         <input class="popup__input popup__input_field_name" id="popup-name" type="text" name="inputName" placeholder="Имя" minlength="2" maxlength="40" autocomplete="off" required>
         <span class="popup__input-error" id="popup-name-error"></span>
 
-        <input class="popup__input popup__input_field_job" id="popup-job" type="text" name="inputJob" placeholder="О себе" minlength="2" maxlength="200" autocomplete="off" required>
+        <input class="popup__input popup__input_field_job popup__input_last-child" id="popup-job" type="text" name="inputJob" placeholder="О себе" minlength="2" maxlength="200" autocomplete="off" required>
         <span class="popup__input-error" id="popup-job-error"></span>
-        <button type="submit" class="popup__submit-button">Сохранить</button>
+        <button type="submit" class="popup__submit-button popup__submit-button_form">Сохранить</button>
       </form>
     </section>
 
     <section class="popup popup-card">
       <form class="popup__form popup__form-card" name="popupForm" novalidate>
         <button class="popup__close-button popup__close-button-card" type="button"></button>
-        <h3 class="popup__title">Новое место</h3>
+        <h3 class="popup__title popup__title_form">Новое место</h3>
         <input class="popup__input popup__input_field_card-name" id="popup-card-name" type="text" name="inputCardName" placeholder="Название"  minlength="2" maxlength="30" autocomplete="off" required>
         <span class="popup__input-error" id="popup-card-name-error"></span>
-        <input class="popup__input popup__input_field_card-link" id="popup-card-link" type="url" name="inputCardLink" placeholder="Ссылка на картинку" autocomplete="off" required>
+        <input class="popup__input popup__input_field_card-link popup__input_last-child" id="popup-card-link" type="url" name="inputCardLink" placeholder="Ссылка на картинку" autocomplete="off" required>
         <span class="popup__input-error" id="popup-card-link-error"></span>
-        <button type="submit" class="popup__submit-button">Создать</button>
+        <button type="submit" class="popup__submit-button popup__submit-button_form">Создать</button>
       </form>
     </section>
 
@@ -78,14 +83,37 @@
     </section>
   </div>
 
+  <section class="popup popup-delete">
+    <form class="popup__form popup__form-delete" name="popupDelete" novalidate>
+      <h3 class="popup__title popup__title-delete">Вы уверены?</h3>
+      <button class="popup__close-button popup__close-button-card" type="button"></button>
+
+      <button type="submit" class="popup__submit-button popup__submit-button_delete">Да</button>
+    </form>
+  </section>
+
+  <section class="popup popup-logo">
+    <form class="popup__form popup__form-logo" name="popupLogo" novalidate>
+      <button class="popup__close-button popup__close-button-card" type="button"></button>
+      <h3 class="popup__title popup__title_form">Обновить аватар</h3>
+      <input class="popup__input popup__input_field_logo-link" id="popup-logo-link" type="url" name="inputAvatar" placeholder="Ссылка на картинку" autocomplete="off" required>
+      <span class="popup__input-error" id="popup-logo-link-error"></span>
+      <button type="submit" class="popup__submit-button popup__submit-button_form">Сохранить</button>
+    </form>
+  </section>
+
+
   <!-- шаблон для карточки -->
   <template id="card-template" class="card-template_type_default">
     <li class="card">
-      <button class="card__trush" type="submit" aria-label="Delete"></button>
+      <button class="card__trush card__trush-hidden" type="submit" aria-label="Delete"></button>
       <img class="card__image">
       <div class="card__content">
         <h2 class="card__title"></h2>
-        <button class="card__like-button" type="button" aria-label="Like"></button>
+        <div class="card__like">
+          <button class="card__like-button" type="button" aria-label="Like"></button>
+          <span class="card__like-count">0</span>
+        </div>
       </div>
     </li>
   </template>

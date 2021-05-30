@@ -15,7 +15,7 @@ export default class PopupWithForm extends Popup {
       // console.log(item.name)
       listValues[item.name] = item.value
     })
-    console.log(listValues)
+    // console.log(listValues)
 
     return listValues
   }
@@ -31,6 +31,7 @@ export default class PopupWithForm extends Popup {
 
   close() {
     this._form.reset();
+
     // console.log(this._form);
     super.close()
   }

@@ -9,6 +9,7 @@
   background-color: transparent;
   background-repeat: no-repeat;
   cursor: pointer;
+  margin-bottom: 2px;
 }
 
 .card__like-button:hover {
