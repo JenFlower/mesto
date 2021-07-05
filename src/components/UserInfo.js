@@ -16,11 +16,14 @@ export default class UserInfo {
 
   // установить данные в профиль из инпутов
   setUserInfo = (nameImput, jobInput) => {
+    if(nameImput)
       this._name.textContent = nameImput
+    if(jobInput)
       this._job.textContent = jobInput
   }
 
   setAvatar = (avatar) => {
-    this._avatar.src = avatar
+    if(avatar)
+      this._avatar.src = avatar
   }
 }

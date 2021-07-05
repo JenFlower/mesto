@@ -9,14 +9,13 @@ export default class PopupDeleteCard extends Popup {
 
     this._popupSubmitBtn = this._form.querySelector('.popup__submit-button')
     this._popupSubmitBtnText = this._popupSubmitBtn.textContent;
-    console.log(this._popupSubmitBtn.textContent)
   }
 
-  timerSumbit = (text) => {
+  startLoadingText = (text) => {
     this._popupSubmitBtn.textContent = text;
   }
 
-  resetTimerSubmit = () => {
+  resetLoadingText = () => {
     this._popupSubmitBtn.textContent = this._popupSubmitBtnText;
   }
 
@@ -24,9 +23,7 @@ export default class PopupDeleteCard extends Popup {
     super.setEventListeners();
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      console.log(this._card)
       this._submitHandler(this._card)
-      // this.close();
     })
   }
 

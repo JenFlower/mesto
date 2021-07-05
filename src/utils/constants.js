@@ -4,7 +4,12 @@ export const config = {
   submitButtonSelector: '.popup__submit-button',
   inactiveButtonClass: 'popup__submit-button_disabled',
   inputErrorClass: 'popup__input_error',
-  errorClass: 'popup__input-error_active'
+  errorClass: 'popup__input-error_active',
+
+
+  nameSelector: '.profile__title',
+  jobSelector: '.profile__subtitle',
+  avatar: '.profile__logo'
 }
 // Находим форму в DOM
 export const formElementProfile = document.querySelector('.popup__form-profile');

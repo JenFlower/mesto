@@ -7,7 +7,7 @@ export default class Section {
 
   // отвечает за отрисовку всех элементов
   render() {
-    this._items.forEach(item => {
+    this._items.reverse().forEach(item => {
       this._renderer(item);
     })
   }

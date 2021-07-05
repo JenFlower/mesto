@@ -19,7 +19,7 @@ profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 logoFormValidator.enableValidation();
 
-const userInfo = new UserInfo({nameSelector: '.profile__title', jobSelector: '.profile__subtitle', avatar: '.profile__logo'})
+const userInfo = new UserInfo({nameSelector: constants.config.nameSelector, jobSelector: constants.config.jobSelector, avatar: constants.config.avatar})
 
 
 let userId;
@@ -47,9 +47,9 @@ Promise.all([api.getUserData(), api.getCards()])
 })
 
 
-let card;
+// let card;
 function createCard(item) {
-  card = new Card(item, '.card-template_type_default', openPreview,
+  const card = new Card(item, '.card-template_type_default', openPreview,
     (cardId, isLiked) => {
       if(!isLiked) {
         // console.log(isLiked)
@@ -62,12 +62,14 @@ function createCard(item) {
           // putLike(res)
             // card.like(res);
         })
+        .catch(err => console.log(err))
       }
       else {
         api.deleteLike(cardId)
         .then((res) => {
           // console.log(res)
         })
+        .catch(err => console.log(err))
       }
     }
   ,
@@ -85,21 +87,23 @@ function openPreview(link, name) {
 }
 
 const popupDeleteCard = new PopupDeleteCard(('.popup-delete'), (card) => {
-  popupDeleteCard.timerSumbit('Удаление...')
+  popupDeleteCard.startLoadingText('Удаление...')
   api.deleteCard(card.getCardId())
   .then(res => {
     card.handleDelete()
   })
   .then(() => {
     popupDeleteCard.close();
-    popupDeleteCard.resetTimerSubmit()
   })
   .catch(err => console.log(err))
+  .finally(() => {
+    popupDeleteCard.resetLoadingText()
+  })
 })
 popupDeleteCard.setEventListeners();
 
 const popupWithFormProfile = new PopupWithForm('.popup-profile', (inputsData)=>{
-  formSubmitHandlerProfile(inputsData);
+  submitEditProfileForm(inputsData);
 });
 popupWithFormProfile.setEventListeners();
 
@@ -116,64 +120,73 @@ popupWithFormLogo.setEventListeners();
 
 function openPopupProfile() {
   profileFormValidator.clearError();
-  constants.nameInput.value = userInfo.getUserInfo().name;
-  constants.jobInput.value = userInfo.getUserInfo().job;
+  // деструктуризация
+  let {name, job} = userInfo.getUserInfo();
+  constants.nameInput.value = name;
+  constants.jobInput.value = job;
   popupWithFormProfile.open();
 }
 
 // Обработчик «отправки» формы
-function formSubmitHandlerProfile({inputName, inputJob}) {
-  popupWithFormProfile.timerSumbit('Сохранение...')
+function submitEditProfileForm({inputName, inputJob}) {
+  popupWithFormProfile.startLoadingText('Сохранение...')
   api.patchUserData({inputName, inputJob})
   .then(res => {
-    console.log(res)
     userInfo.setUserInfo(res.name, res.about)
   })
   .then(() => {
-    popupWithFormProfile.resetTimerSubmit()
     popupWithFormProfile.close()
   })
   .catch(err => console.log(err))
+  .finally(() => {
+    popupWithFormProfile.resetLoadingText()
+  })
 }
 function formSubmitHandlerUpdateAvatar(avatar) {
-  popupWithFormLogo.timerSumbit('Сохранение...')
+  popupWithFormLogo.startLoadingText('Сохранение...')
   api.updateAvatar(avatar)
   .then((res) => {
     userInfo.setAvatar(res.avatar)
   })
   .then(() => {
-    popupWithFormLogo.resetTimerSubmit()
+    popupWithFormLogo.resetLoadingText()
     popupWithFormLogo.close()
   })
   .catch(err => console.log(err))
+  .finally(() => {
+    popupWithFormLogo.resetLoadingText()
+  })
 }
 
 constants.buttonEdit.addEventListener('click', openPopupProfile);
 
 function formSubmitHandlerAddCard({inputCardName, inputCardLink}) {
-  popupWithFormAddCard.timerSumbit('Сохранение...')
+  popupWithFormAddCard.startLoadingText('Сохранение...')
   api.postCard({inputCardName, inputCardLink})
   .then(res => {
     section.addItem(createCard(res))
   })
   .then(() => {
-    popupWithFormAddCard.resetTimerSubmit()
+    popupWithFormAddCard.resetLoadingText()
     popupWithFormAddCard.close()
   })
   .catch(err => console.log(err))
+  .finally(() => {
+    popupWithFormAddCard.resetLoadingText()
+  })
 }
 
 
 constants.buttonPlus.addEventListener('click', function(){
   addCardFormValidator.clearError();
   popupWithFormAddCard.open();
-  popupWithFormAddCard.resetTimerSubmit()
+  popupWithFormAddCard.resetLoadingText()
 });
 
 constants.logoImage.addEventListener('click', function() {
   logoFormValidator.clearError();
   popupWithFormLogo.open()
-  popupWithFormLogo.resetTimerSubmit()
+  popupWithFormLogo.resetLoadingText()
 })
 
 

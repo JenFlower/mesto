@@ -11,11 +11,11 @@ export default class PopupWithForm extends Popup {
     this._popupSubmitBtnText = this._popupSubmitBtn.textContent;
   }
 
-  timerSumbit = (text) => {
+  startLoadingText = (text) => {
     this._popupSubmitBtn.textContent = text;
   }
 
-  resetTimerSubmit = () => {
+  resetLoadingText = () => {
     this._popupSubmitBtn.textContent = this._popupSubmitBtnText;
   }
 
