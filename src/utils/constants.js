@@ -21,6 +21,7 @@ export const titlePopup = document.querySelector('.profile__title');
 export const subtitlePopup = document.querySelector('.profile__subtitle');
 
 
+export const cardLikeBtn = document.querySelector('.card__like-button');
 // Находим поля формы в DOM
 export const nameInput = document.querySelector('.popup__input_field_name');
 export const jobInput = document.querySelector('.popup__input_field_job');
@@ -42,4 +43,4 @@ export const previewPopup = document.querySelector('.popup-preview');
 
 // ul, в который надо добавить карточки
 export const elementsList = document.querySelector('.elements__list');
-
+export const card = document.querySelector('.card');

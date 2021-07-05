@@ -2,7 +2,7 @@ export default class UserInfo {
   constructor({nameSelector, jobSelector, avatar}) {
     this._name = document.querySelector(nameSelector);
     this._job = document.querySelector(jobSelector);
-    this._avatar = document.querySelector(avatar)
+    this._avatar = document.querySelector(avatar);
   }
 
   // подставить в форму при открытии
@@ -15,18 +15,10 @@ export default class UserInfo {
   }
 
   // установить данные в профиль из инпутов
-  setUserData = (nameImput, jobInput, avatar) => {
-      // console.log(nameImput)
+  setUserInfo = (nameImput, jobInput) => {
       this._name.textContent = nameImput
       this._job.textContent = jobInput
-      this._avatar.src = avatar
   }
-
-  setUserInfo = (nameImput, jobInput) => {
-    // console.log(nameImput)
-    this._name.textContent = nameImput
-    this._job.textContent = jobInput
-}
 
   setAvatar = (avatar) => {
     this._avatar.src = avatar

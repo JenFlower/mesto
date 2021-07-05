@@ -5,13 +5,17 @@ export default class Api  {
     this._groupId = groupId;
   }
 
+  _checkResponse(res) {
+    return res ? res.json() : Promise.reject(`Error: ${res.status}`)
+  }
+
   getCards() {
     return fetch(`${this._address}/v1/${this._groupId}/cards`, {
       headers: {
         authorization: this._token
       },
     })
-    .then(res => res ? res.json() : Promise.reject(`Error: ${res.status}`))
+    .then(this._checkResponse)
   }
 
   getUserData() {
@@ -22,11 +26,11 @@ export default class Api  {
 
       }
     })
-    .then(res => res ? res.json() : Promise.reject(`Error: ${res.status}`))
+    .then(this._checkResponse)
   }
 
 
-  patchUserDara({inputName, inputJob}) {
+  patchUserData({inputName, inputJob}) {
     return fetch(`${this._address}/v1/${this._groupId}/users/me`, {
       method: 'PATCH',
       headers: {
@@ -38,12 +42,12 @@ export default class Api  {
         about: inputJob
       })
     })
-    .then(res => res ? res.json() : Promise.reject(`Error: ${res.status}`))
+    .then(this._checkResponse)
   }
 
   updateAvatar(inputData) {
     return fetch(`${this._address}/v1/${this._groupId}/users/me/avatar`, {
-      method: 'PATCH', //????
+      method: 'PATCH',
       headers: {
         authorization: this._token,
         'content-type': 'application/json'
@@ -52,7 +56,7 @@ export default class Api  {
         avatar: inputData
       })
     })
-    .then(res => res ? res.json() : Promise.reject(`Error: ${res.status}`))
+    .then(this._checkResponse)
   }
 
   putLike(cardId) {
@@ -63,7 +67,7 @@ export default class Api  {
         'Content-Type': 'application/json'
       },
     })
-    .then(res => res ? res.json() : Promise.reject(`Error: ${res.status}`))
+    .then(this._checkResponse)
   }
 
 
@@ -75,7 +79,7 @@ export default class Api  {
         'Content-Type': 'application/json'
       }
     })
-    .then(res => res ? res.json() : Promise.reject(`Error: ${res.status}`))
+    .then(this._checkResponse)
   }
 
   postCard({inputCardName, inputCardLink}) {
@@ -90,19 +94,17 @@ export default class Api  {
         link: inputCardLink
       })
     })
-    .then(res => res ? res.json() : Promise.reject(`Error: ${res.status}`))
+    .then(this._checkResponse)
   }
 
-  deleteCard(idCard) {
-    return fetch(`${this._address}/v1/${this._groupId}/cards/${idCard}`, {
+  deleteCard(cardId) {
+    return fetch(`${this._address}/v1/${this._groupId}/cards/${cardId}`, {
       method: 'DELETE',
       headers: {
         authorization: this._token
       }
 
     })
-    .then(res => res ? res.json() : Promise.reject(`Error: ${res.status}`))
+    .then(this._checkResponse)
   }
-
-
 }
